@@ -1,0 +1,160 @@
+@import '../../design-tokens/mixins.scss';
+
+.header {
+  width: 100%;
+  min-height: 400px;
+}
+
+.header__wrap {
+  @include container;
+}
+
+.header__top {
+  @include container;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding-top: 27px;
+  padding-bottom: 30px;
+}
+
+.header__left {
+  display: flex;
+  align-items: flex-end;
+}
+
+.header__nav {
+  margin-left: 58px;
+}
+
+.header__nav-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  align-items: flex-end;
+}
+
+.header__nav-item {
+  margin-right: 25px;
+}
+
+.header__nav-link {
+  color: $text-color-1;
+  text-decoration: none;
+
+  &:hover {
+    color: $color-blue;
+  }
+
+  &--active {
+    color: $color-blue;
+    cursor: default;
+  }
+}
+
+.header__icon {
+  margin-right: 10px;
+  width: 20px;
+  height: 22px;
+}
+
+.heder__login-link {
+  display: flex;
+  align-items: flex-end;
+  color: $text-color-1;
+  text-decoration: none;
+  line-height: 18px;
+
+  &:hover {
+    color: $color-blue;
+  }
+}
+
+.header__login-name {
+  margin: 0;
+}
+
+.header__buttom {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  z-index: 1;
+  background-color: $color-blue;
+}
+
+.header__left-decor {
+  display: flex;
+}
+
+.header__right-decor {
+  display: flex;
+}
+
+.header__buttom img {
+  display: block;
+}
+
+.header__inner {
+  padding-top: 80px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  width: 850px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.header__title {
+  margin: 0 0 25px 0;
+  font-size: 54px;
+  font-weight: 700;
+  line-height: 63px;
+  color: $bg-color-blocks;
+}
+
+.header__subtitle {
+  margin: 0 0 40px 0;
+  font-size: 22px;
+  line-height: 26px;
+  color: $text-color-gray2;
+}
+
+.header__cards {
+  position: relative;
+}
+
+.header__card {
+  display: block;
+
+  &--black {
+    position: relative;
+    z-index: 2;
+  }
+
+  &--white {
+    margin-left: 140px;
+    margin-bottom: -130px;
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.header__btn {
+  display: inline-block;
+  padding: 20px 36px;
+  background-color: $bg-color-blocks;
+  border-radius: 4px;
+  color: $text-color-1;
+  font-weight: 500;
+  font-size: 18px;
+  list-style: 18px;
+  text-decoration: none;
+
+  &:hover {
+    color: $color-blue;
+  }
+}
+
+

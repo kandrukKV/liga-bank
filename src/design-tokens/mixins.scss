@@ -1,0 +1,7 @@
+@import './sass-variables.scss';
+
+@mixin container() {
+  width: 100%;
+  max-width: $content-width;
+  margin: 0 auto;
+}

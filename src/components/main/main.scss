@@ -1,0 +1,11 @@
+@import '../../design-tokens/mixins.scss';
+
+.main {
+  padding-top: 60px;
+  padding-bottom: 110px;
+}
+
+.main__title {
+  @include container;
+  margin-bottom: 70px;
+}

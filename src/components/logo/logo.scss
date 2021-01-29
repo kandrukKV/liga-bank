@@ -1,0 +1,19 @@
+@import '../../design-tokens/mixins.scss';
+
+.logo {
+  display: flex;
+  align-items: flex-end;
+}
+
+.logo__img {
+  margin-right: 9px;
+  width: 28px;
+  height: 25px;
+}
+
+.logo__name {
+  font-family: "Work-Sans" , Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  line-height: 20px;
+  font-weight: 700;
+}

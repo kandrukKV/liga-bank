@@ -1,0 +1,67 @@
+@import '../../design-tokens/mixins.scss';
+
+.footer {
+  padding: 50px 0 60px 0;
+  background-color: $bg-color-blocks;
+}
+
+.footer__wrap {
+  @include container;
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer__descr {
+  margin: 0;
+  font-size: 12px;
+  line-height: 16.8px;
+  color: $text-color-gray;
+
+  &--mt20 {
+    margin-top: 20px;
+  }
+}
+
+.footer__nav-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer__nav-item {
+  margin-bottom: 20px;
+}
+
+.footer__nav-item a {
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 22px;
+  text-decoration: none;
+  color: $text-color-1;
+}
+
+.footer__phone {
+  position: relative;
+  padding-left: 30px;
+}
+
+.footer__phone-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.footer__number {
+  margin: 0 0 10px 0;
+  font-weight: 500;
+}
+
+.footer__social-list {
+  width: 110px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
