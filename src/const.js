@@ -13,3 +13,4 @@ export const MENU_LIST = [
   {name: 'Контакты', path: AppRoute.CONTACTS, id:4},
   {name: 'Задать вопрос', path: AppRoute.QUESTION, id:5}
 ];
+

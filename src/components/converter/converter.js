@@ -1,5 +1,6 @@
 import './converter.scss';
 import sprites from '../../img/converter-sprites.svg';
+import DateSelect from '../date-select/date-select';
 
 const Converter = () => {
   return (
@@ -53,13 +54,10 @@ const Converter = () => {
         </div>
 
         <div className="converter__row">
-          <div className="converter__date">
-            <label htmlFor="c_date" className="visually-hidden">Поле ввода куда</label>
-            <input className="converter__input converter__input--date" type="text" id="c_date" name="input_from" value="13,1234"/>
-            <svg className="converter__calendar" width="41" height="44">
-              <use href={sprites + "#calendar"}/> 
-            </svg>
-          </div>
+          <DateSelect
+            minDate={"2021-01-01"}
+            currentDate={new Date()}
+          />
           <button className="converter__btn" type="button">Сохранить результат</button>
         </div>
         
