@@ -1,0 +1,27 @@
+@import '../../design-tokens/mixins.scss';
+
+.preloader {
+  margin-bottom: 20px;
+}
+
+.line {
+  display: inline-block;
+  width: 15px;
+  height: 10px;
+  border-radius: 15px;
+  background-color: $color-blue;
+  animation: loading 1.5s cubic-bezier(0.17, 0.37, 0.43, 0.67) infinite;
+}
+
+@keyframes loading {
+  0% {
+    width: 15px;
+  }
+  50% {
+    width: 35px;
+    padding: 4px;
+  }
+  100% {
+    width: 15px;
+  }
+}

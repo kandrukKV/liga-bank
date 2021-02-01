@@ -1,10 +1,14 @@
- export const AppRoute = {
-   SERVICE: '/service',
-   CREDIT: '/credit',
-   CONVERTER: '/',
-   CONTACTS: '/contacts',
-   QUESTION: '/question'
- }
+export const CURRENCIES = ['RUB', 'USD', 'EUR', 'GBP', 'CNY'];
+
+export const MAX_HISTORY_LENGTH = 10;
+
+export const AppRoute = {
+  SERVICE: '/service',
+  CREDIT: '/credit',
+  CONVERTER: '/',
+  CONTACTS: '/contacts',
+  QUESTION: '/question'
+}
 
 export const MENU_LIST = [
   {name: 'Услуги', path: AppRoute.SERVICE, id:1},
