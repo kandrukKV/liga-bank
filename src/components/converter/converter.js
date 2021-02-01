@@ -59,7 +59,7 @@ class Converter extends PureComponent {
       resolve();
     })
       .then(() => {
-        this.props.onChangeIwantValue(this.props.iHaveValue * this.props.rateIndex)
+        this.props.onChangeIwantValue(this.props.iHaveValue * this.props.rateIndex);
       }) 
   }
 
@@ -79,7 +79,7 @@ class Converter extends PureComponent {
       resolve();
     })
       .then(() => {
-        this.props.getCurrencyList();
+        this.props.onChangeIwantValue(this.props.iHaveValue * this.props.rateIndex);
       })
   }
 

@@ -1,6 +1,7 @@
-import {getTodaysDate, getDateList} from '../utils';
+import {getDateList} from '../utils';
 
 export const ActionType = {
+  SET_PERIOD: 'SET_PERIOD',
   CHANGE_I_HAVE_VALUE: 'CHANGE_I_HAVE_VALUE',
   CHANGE_I_WANT_VALUE: 'CHANGE_I_WANT_VALUE',
   CHANGE_HAVE_CURRENCY: 'CHANGE_HAVE_CURRENCY',
@@ -12,6 +13,11 @@ export const ActionType = {
   SAVE_RESULT: 'SAVE_RESULT',
   CLEAR_HISTORY: 'CLEAR_HISTORY'
 };
+
+export const setPeriodAction = (period) => ({
+  type: ActionType.SET_PERIOD,
+  payload: period
+});
 
 export const changeIhaveValueAction = (value) => ({
   type: ActionType.CHANGE_I_HAVE_VALUE,
@@ -68,7 +74,7 @@ export const getCarencyListAction = () => (dispatch, _getState, api) => {
   const {rates} = state;
 
   const res = rates.find((item) => {
-    return item.date === state.currentDate && item.base === state.haveCurrency;
+    return item.base === state.haveCurrency;
   }); 
 
   if (!res) {
@@ -76,32 +82,44 @@ export const getCarencyListAction = () => (dispatch, _getState, api) => {
 
     let date = state.currentDate;
     let res = null;
+
     if (!date) {
-      res = api.getCurrencyList(getTodaysDate(), state.haveCurrency)
+
+      res = api.getCurrencyList(state.period.start, state.period.end, state.haveCurrency)
         .then((rates) => {
-          dispatch(setCurrentDateAction(rates.date));
-          dispatch(setDateListAction(getDateList(rates.date)));
+          const dateList = getDateList(rates.rates);
+          dispatch(setDateListAction(dateList));
+          dispatch(setCurrentDateAction(dateList[0]));
           dispatch(addRatesAction(rates));
-          dispatch(changeIwantValueAction(state.iHaveValue * (rates.rates[state.wantCurrency] ? rates.rates[state.wantCurrency] : 1)));
+          dispatch(changeIwantValueAction(state.iHaveValue * rates.rates[dateList[0]][state.wantCurrency]));
           dispatch(setIsConverterDisabledAction(false));
         })
-        .catch((err) => console.log('Error: ' + err));
       
     } else {
-      res = api.getCurrencyList(date, state.haveCurrency)
+      res = api.getCurrencyList(state.period.start, state.period.end, state.haveCurrency)
         .then((rates) => {
+          const dateList = getDateList(rates.rates);
+          dispatch(setDateListAction(dateList));
           dispatch(addRatesAction(rates));
-          dispatch(changeIwantValueAction(state.iHaveValue * (rates.rates[state.wantCurrency] ? rates.rates[state.wantCurrency] : 1)));
+          const rateIndex = rates.rates[state.dateList[0]][state.wantCurrency] ? rates.rates[state.dateList[0]][state.wantCurrency] : 1;
+          dispatch(changeIwantValueAction(state.iHaveValue * rateIndex));
           dispatch(setIsConverterDisabledAction(false));
         })
     }
+
     res.catch((err) => {
       console.log('Error: ' + err);
       dispatch(setIsConverterDisabledAction(false));
     });
 
   } else {
-    dispatch(changeIwantValueAction(state.iHaveValue * res.rates[state.wantCurrency]));
+    
+    const rateIndex = res.rates[state.currentDate][state.wantCurrency] ? res.rates[state.currentDate][state.wantCurrency] : 1;
+    const dateList = getDateList(res.rates);
+
+    dispatch(setDateListAction(dateList));
+    dispatch(changeIwantValueAction(state.iHaveValue *  rateIndex));
+
   }
 
 };

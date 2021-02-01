@@ -6,24 +6,19 @@ export const extend = (a, b) => {
 
 const addZero = (num) => num <= 9 ? `0` + num : num;
 
-export const getDateList = (currentDate) => {
-  
-  const result = [];
-  const dayMilliseconds = 24*60*60*1000;
-  const date = new Date(currentDate);
-
-  result.push(`${date.getFullYear()}-${addZero(date.getMonth() + 1)}-${addZero(date.getDate())}`)
-
-  for (let i = 1; i < 7; i++) {
-    date.setTime(date.getTime() - dayMilliseconds);
-    result.push(`${date.getFullYear()}-${addZero(date.getMonth() + 1)}-${addZero(date.getDate())}`)
-  }
-
-  return result;
+export const getDateList = (rates) => {
+  return Object.keys(rates).sort((a, b) => a > b);
 };
 
-export const getTodaysDate = () => {
+export const getEndDate = () => {
   const date = new Date();
+  return `${date.getFullYear()}-${addZero(date.getMonth() + 1)}-${addZero(date.getDate())}`;
+};
+
+export const getStartDate = (endDate) => {
+  const sevenDayMilliseconds = 24*60*60*1000*7;
+  const date = new Date(endDate);
+  date.setTime(date.getTime() - sevenDayMilliseconds);
   return `${date.getFullYear()}-${addZero(date.getMonth() + 1)}-${addZero(date.getDate())}`;
 };
 

@@ -1,7 +1,12 @@
 import {ActionType} from './action';
-import {extend, saveResult} from '../utils';
+import {extend, saveResult, getStartDate, getEndDate,} from '../utils';
+
+
+const end = getEndDate();
+const start = getStartDate(end);
 
 const initialState = {
+  period: {start, end},
   isConverterDisabled: false,
   iHaveValue: 1,
   iWantValue: '',
@@ -28,6 +33,10 @@ const initialState = {
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case ActionType.SET_PERIOD:
+      return extend(state, {
+        period: action.period
+      });
     case ActionType.CHANGE_I_HAVE_VALUE:
       return extend(state, {
         iHaveValue: action.payload

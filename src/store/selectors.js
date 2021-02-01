@@ -15,10 +15,10 @@ export const getRateIndex = (state) => {
     return 1;
   }
 
-  const element = state.rates.find(item => item.date === state.currentDate && item.base === state.haveCurrency);
+  const element = state.rates.find(item => item.base === state.haveCurrency);
 
   if (element) {
-    return element.rates[state.wantCurrency]
+    return element.rates[state.currentDate][state.wantCurrency];
   }
 
   return 1;
