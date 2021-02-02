@@ -11,7 +11,8 @@ export const AppRoute = {
   CREDIT: '/credit',
   CONVERTER: '/',
   CONTACTS: '/contacts',
-  QUESTION: '/question'
+  QUESTION: '/question',
+  LOGIN: '/login'
 }
 
 export const MENU_LIST = [

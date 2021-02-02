@@ -1,4 +1,4 @@
-import {CURRENCIES, MAX_HISTORY_LENGTH, NUMBER_OF_DAYS_AGO} from './const';
+import {MAX_HISTORY_LENGTH, NUMBER_OF_DAYS_AGO} from './const';
 
 export const extend = (a, b) => {
   return Object.assign({}, a, b);
@@ -20,21 +20,6 @@ export const getStartDate = (endDate) => {
   const date = new Date(endDate);
   date.setTime(date.getTime() - dayMillisecondsAgo);
   return `${date.getFullYear()}-${addZero(date.getMonth() + 1)}-${addZero(date.getDate())}`;
-};
-
-export const getAllCombinationsOfArray = (array) => {
-  const results = [];
-  for (let i = 0; i < array.length - 1; i++) {
-    for (let j = i + 1; j < array.length; j++) {
-      results.push(`${array[i]}${array[j]}`);
-      results.push(`${array[j]}${array[i]}`);
-    }
-  }
-  return results;
-};
-
-export const getAllCurrencyPairsExeptBase = (base) => {
-  return CURRENCIES.filter((item) => item !== base).join(',')
 };
 
 export const saveResult = (array, element) => {

@@ -42,6 +42,10 @@ const App = () => {
               <Main mainTitle='Задать вопрос'/>
             </Route>
 
+            <Route path={AppRoute.LOGIN}>
+              <Main mainTitle='Вход в Интернет банк'/>
+            </Route>
+
           </Switch>
         
         <Footer/>

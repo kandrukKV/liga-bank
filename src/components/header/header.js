@@ -7,6 +7,9 @@ import rect4 from '../../img/rect-4.png';
 import cardBlack from '../../img/card-black.png';
 import cardWhite from '../../img/card-white.png';
 
+import {Link} from 'react-router-dom';
+import {AppRoute} from '../../const';
+
 import Logo from '../logo/logo';
 
 import Nav from '../nav/nav';
@@ -21,12 +24,12 @@ const Header = () => {
           <Nav menuList={MENU_LIST}/>
         </div>
         <div className="header__login">
-          <a className="heder__login-link" href="http://ya.ru">
+          <Link className="heder__login-link" to={AppRoute.LOGIN}>
             <svg className="header__icon">
               <use href={sprite + "#exit"}/>
             </svg>
             <p className="header__login-name">Войти в Интернет банк</p>
-          </a>
+          </Link>
         </div>
       </div>
       <div className="header__buttom">
@@ -42,9 +45,9 @@ const Header = () => {
           <div className="header__label">
             <h2 className="header__title">Лига Банк</h2>
             <p className="header__subtitle">Кредиты на любой случай</p>
-            <a href="http://ya.ru" className="header__btn">
+            <Link className="header__btn" to={AppRoute.CREDIT}>
               Рассчитать кредит
-            </a>
+            </Link>
           </div>
           <div className="header__cards">
             <img className="header__card header__card--white" src={cardWhite} width="297" height="186" alt="декоративный элемент"/>
