@@ -1,4 +1,5 @@
 import {getDateList} from '../utils';
+import {CALCULATION_ACCURACY} from '../const';
 
 export const ActionType = {
   SET_PERIOD: 'SET_PERIOD',
@@ -68,6 +69,26 @@ export const clearHistoryAction = () => ({
   type: ActionType.CLEAR_HISTORY
 });
 
+export const initApp = () => (dispatch, _getState, api) => {
+  const state = _getState();
+
+  dispatch(setIsConverterDisabledAction(true));
+
+  api.getCurrencyList(state.period.start, state.period.end, state.haveCurrency)
+    .then((rates) => {
+      const dateList = getDateList(rates.rates);
+      dispatch(setDateListAction(dateList));
+      dispatch(setCurrentDateAction(dateList[0]));
+      dispatch(addRatesAction(rates));
+      dispatch(changeIwantValueAction((state.iHaveValue * rates.rates[dateList[0]][state.wantCurrency]).toFixed(CALCULATION_ACCURACY)));
+      dispatch(setIsConverterDisabledAction(false));
+    })
+    .catch((err) => {
+      console.log('Ошибка инициализации:' + err);
+    })
+
+}
+
 export const getCarencyListAction = () => (dispatch, _getState, api) => {
   const state = _getState();
 
@@ -80,46 +101,25 @@ export const getCarencyListAction = () => (dispatch, _getState, api) => {
   if (!res) {
     dispatch(setIsConverterDisabledAction(true));
 
-    let date = state.currentDate;
-    let res = null;
-
-    if (!date) {
-
-      res = api.getCurrencyList(state.period.start, state.period.end, state.haveCurrency)
-        .then((rates) => {
-          const dateList = getDateList(rates.rates);
-          dispatch(setDateListAction(dateList));
-          dispatch(setCurrentDateAction(dateList[0]));
-          dispatch(addRatesAction(rates));
-          dispatch(changeIwantValueAction(state.iHaveValue * rates.rates[dateList[0]][state.wantCurrency]));
-          dispatch(setIsConverterDisabledAction(false));
-        })
-      
-    } else {
-      res = api.getCurrencyList(state.period.start, state.period.end, state.haveCurrency)
-        .then((rates) => {
-          const dateList = getDateList(rates.rates);
-          dispatch(setDateListAction(dateList));
-          dispatch(addRatesAction(rates));
-          const rateIndex = rates.rates[state.dateList[0]][state.wantCurrency] ? rates.rates[state.dateList[0]][state.wantCurrency] : 1;
-          dispatch(changeIwantValueAction(state.iHaveValue * rateIndex));
-          dispatch(setIsConverterDisabledAction(false));
-        })
-    }
-
-    res.catch((err) => {
-      console.log('Error: ' + err);
-      dispatch(setIsConverterDisabledAction(false));
-    });
-
+    api.getCurrencyList(state.period.start, state.period.end, state.haveCurrency)
+      .then((rates) => {
+        const dateList = getDateList(rates.rates);
+        dispatch(setDateListAction(dateList));
+        dispatch(addRatesAction(rates));
+        const rateIndex = rates.rates[state.dateList[0]][state.wantCurrency] ? rates.rates[state.dateList[0]][state.wantCurrency] : 1;
+        dispatch(changeIwantValueAction((state.iHaveValue * rateIndex).toFixed(CALCULATION_ACCURACY)));
+        dispatch(setIsConverterDisabledAction(false));
+      })
+      .catch((err) => {
+        console.log('Ошибка получения данных' + err);
+        dispatch(setIsConverterDisabledAction(false));
+      })
   } else {
     
     const rateIndex = res.rates[state.currentDate][state.wantCurrency] ? res.rates[state.currentDate][state.wantCurrency] : 1;
     const dateList = getDateList(res.rates);
 
     dispatch(setDateListAction(dateList));
-    dispatch(changeIwantValueAction(state.iHaveValue *  rateIndex));
-
+    dispatch(changeIwantValueAction((state.iHaveValue *  rateIndex.toFixed(CALCULATION_ACCURACY))));
   }
-
 };

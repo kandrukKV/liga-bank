@@ -3,7 +3,7 @@ import {PureComponent} from 'react';
 import {connect} from "react-redux";
 import CurrencySelect from '../currency-select/currency-select';
 import CurrencyInput from '../currency-input/currency-input';
-import {CURRENCIES} from '../../const';
+import {CURRENCIES, CALCULATION_ACCURACY} from '../../const';
 import CurrencyAPI from '../../services/currency-api';
 import Preloader from '../preloader/preloader';
 import DateSelect from '../date-select/date-select';
@@ -45,12 +45,12 @@ class Converter extends PureComponent {
 
   changeBaseCurencyValue(value) {
     this.props.onChangeIhaveValue(value);
-    this.props.onChangeIwantValue(value * this.props.rateIndex);
+    this.props.onChangeIwantValue((value * this.props.rateIndex).toFixed(CALCULATION_ACCURACY));
   }
 
   changeSecondCurrencyValue(value) {
     this.props.onChangeIwantValue(value);
-    this.props.onChangeIhaveValue(value / this.props.rateIndex);
+    this.props.onChangeIhaveValue((value / this.props.rateIndex).toFixed(CALCULATION_ACCURACY));
   }
 
   changeSecondCurrencyName(value) {
@@ -59,7 +59,7 @@ class Converter extends PureComponent {
       resolve();
     })
       .then(() => {
-        this.props.onChangeIwantValue(this.props.iHaveValue * this.props.rateIndex);
+        this.props.onChangeIwantValue((this.props.iHaveValue * this.props.rateIndex).toFixed(CALCULATION_ACCURACY));
       }) 
   }
 
@@ -79,7 +79,7 @@ class Converter extends PureComponent {
       resolve();
     })
       .then(() => {
-        this.props.onChangeIwantValue(this.props.iHaveValue * this.props.rateIndex);
+        this.props.onChangeIwantValue((this.props.iHaveValue * this.props.rateIndex).toFixed(CALCULATION_ACCURACY));
       })
   }
 

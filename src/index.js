@@ -7,7 +7,7 @@ import thunk from "redux-thunk";
 import CurrencyAPI from './services/currency-api';
 import './index.scss';
 import App from './components/app/app';
-import {getCarencyListAction} from './store/action';
+import {initApp} from './store/action';
 
 import {reducer} from './store/reducer';
 
@@ -17,8 +17,7 @@ const store = createStore(reducer,
   composeWithDevTools(applyMiddleware(thunk.withExtraArgument(api)))
 );
 
-store.dispatch(getCarencyListAction());
-
+store.dispatch(initApp());
 
 ReactDOM.render(
   <React.StrictMode>

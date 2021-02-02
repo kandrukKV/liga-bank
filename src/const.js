@@ -2,6 +2,10 @@ export const CURRENCIES = ['RUB', 'USD', 'EUR', 'GBP', 'CNY'];
 
 export const MAX_HISTORY_LENGTH = 10;
 
+export const  NUMBER_OF_DAYS_AGO = 7;
+
+export const CALCULATION_ACCURACY = 4;
+
 export const AppRoute = {
   SERVICE: '/service',
   CREDIT: '/credit',

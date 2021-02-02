@@ -1,4 +1,4 @@
-import {CURRENCIES, MAX_HISTORY_LENGTH} from './const';
+import {CURRENCIES, MAX_HISTORY_LENGTH, NUMBER_OF_DAYS_AGO} from './const';
 
 export const extend = (a, b) => {
   return Object.assign({}, a, b);
@@ -16,9 +16,9 @@ export const getEndDate = () => {
 };
 
 export const getStartDate = (endDate) => {
-  const sevenDayMilliseconds = 24*60*60*1000*7;
+  const dayMillisecondsAgo = 24*60*60*1000*NUMBER_OF_DAYS_AGO;
   const date = new Date(endDate);
-  date.setTime(date.getTime() - sevenDayMilliseconds);
+  date.setTime(date.getTime() - dayMillisecondsAgo);
   return `${date.getFullYear()}-${addZero(date.getMonth() + 1)}-${addZero(date.getDate())}`;
 };
 
@@ -39,9 +39,16 @@ export const getAllCurrencyPairsExeptBase = (base) => {
 
 export const saveResult = (array, element) => {
   const result = array.slice();
-  result.push(element);
+  result.push(extend(element, {
+    currentDate: convertDateToClient(element.currentDate)
+  }));
   if (result.length > MAX_HISTORY_LENGTH) {
      result.shift();
   };
   return result;
+};
+
+export const convertDateToClient = (date) => {
+  const res = date.split('-');
+  return `${res[2]}-${res[1]}-${res[0]}`;
 };

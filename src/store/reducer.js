@@ -1,5 +1,5 @@
 import {ActionType} from './action';
-import {extend, saveResult, getStartDate, getEndDate,} from '../utils';
+import {extend, saveResult, getStartDate, getEndDate} from '../utils';
 
 
 const end = getEndDate();
@@ -8,26 +8,13 @@ const start = getStartDate(end);
 const initialState = {
   period: {start, end},
   isConverterDisabled: false,
-  iHaveValue: 1,
+  iHaveValue: 1000,
   iWantValue: '',
   haveCurrency: 'RUB',
   wantCurrency: 'USD',
   currentDate: '',
-  // currentDate: '2021-01-29',
   dateList: [],
-  rates: [
-    // {
-    //   date: '2021-01-29',
-    //   base: 'RUB',
-    //   rates: {
-    //     USD: '2',
-    //     RUB: '1',
-    //     EUR: '3',
-    //     CNY: '4',
-    //     GBP: '5'
-    //   }
-    // }
-  ],
+  rates: [],
   history: []
 };
 
@@ -64,7 +51,6 @@ export const reducer = (state = initialState, action) => {
     case ActionType.ADD_RATES:
       const newRates = state.rates.slice();
       newRates.push(action.payload);
-
       return extend(state, {
         rates: newRates
       });
