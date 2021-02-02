@@ -1,3 +1,4 @@
+import PropTypes, { shape } from 'prop-types';
 import './nav.scss';
 import {NavLink} from 'react-router-dom';
 
@@ -17,6 +18,14 @@ const Nav = ({menuList}) => {
       </ul>
     </nav>
   )
+}
+
+Nav.propTypes = {
+  menuList: PropTypes.arrayOf(shape({
+    id: PropTypes.number.isRequired,
+    path: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired
+  }))
 }
 
 export default Nav;

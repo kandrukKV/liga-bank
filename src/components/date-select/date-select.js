@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import './date-select.scss';
 import calendar from '../../img/calendar.svg';
 
@@ -17,6 +18,13 @@ const DateSelect = ({currentDate, possibleDates, isDisabled, onChangeValue}) => 
       <img className="date-select__icon" src={calendar} width="41" height="44" alt="calendar-icon"/>
     </div>
   );
-}
+};
+
+DateSelect.propTypes = {
+  currentDate: PropTypes.string.isRequired,
+  possibleDates: PropTypes.arrayOf(PropTypes.string).isRequired,
+  isDisabled: PropTypes.bool.isRequired,
+  onChangeValue: PropTypes.func.isRequired
+};
 
 export default DateSelect;

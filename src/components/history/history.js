@@ -1,9 +1,10 @@
+import PropTypes from 'prop-types';
 import './history.scss';
 import {connect} from 'react-redux';
 import {getHistory} from '../../store/selectors';
 import {clearHistoryAction} from '../../store/action';
 
-const History = ({historyList, clearHistory}) => {
+const History = ({historyList, onClickClearHistory}) => {
   
   return (
      <section className="history">
@@ -56,21 +57,26 @@ const History = ({historyList, clearHistory}) => {
           <button
             className="history__btn"
             type="button"
-            onClick={clearHistory}
+            onClick={onClickClearHistory}
           >Очистить историю
           </button>
         </>
       }
      </section>
   );
-}
+};
+
+History.propTypes = {
+  historyList: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onClickClearHistory: PropTypes.func.isRequired
+};
 
 const mapStateToProps = (state) => ({
   historyList: getHistory(state)
 });
 
 const mapDispachToProps = (dispatch) => ({
-  clearHistory() {
+  onClickClearHistory() {
     dispatch(clearHistoryAction());
   }
 })

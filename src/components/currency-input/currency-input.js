@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import './currency-input.scss';
 
 const CurrencyInput = ({iValue, onChangeValue, isDisabled}) => {
@@ -16,5 +17,11 @@ const CurrencyInput = ({iValue, onChangeValue, isDisabled}) => {
     </label>
   );
 };
+
+CurrencyInput.propTypes = {
+  iValue: PropTypes.string.isRequired,
+  isDisabled: PropTypes.bool.isRequired,
+  onChangeValue: PropTypes.func.isRequired
+}
 
 export default CurrencyInput;

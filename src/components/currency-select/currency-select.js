@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import './currency-select.scss';
 
 const CurrencySelect = ({currencies, currentValue, isDisabled, onChangeValue}) => {
@@ -24,6 +25,13 @@ const CurrencySelect = ({currencies, currentValue, isDisabled, onChangeValue}) =
       </svg>
     </div>
   );
+}
+
+CurrencySelect.propTypes = {
+  currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
+  currentValue: PropTypes.string.isRequired,
+  onChangeValue: PropTypes.func.isRequired,
+  isDisabled: PropTypes.bool.isRequired
 }
 
 export default CurrencySelect;

@@ -1,6 +1,7 @@
 import './converter.scss';
 import {PureComponent} from 'react';
 import {connect} from "react-redux";
+import PropTypes from 'prop-types';
 import CurrencySelect from '../currency-select/currency-select';
 import CurrencyInput from '../currency-input/currency-input';
 import {CURRENCIES, CALCULATION_ACCURACY} from '../../const';
@@ -92,7 +93,7 @@ class Converter extends PureComponent {
       currentDate,
       isDisabledForm,
       dateList,
-      saveResult
+      onClickSaveResult
     } = this.props;
 
     return (
@@ -168,7 +169,7 @@ class Converter extends PureComponent {
               className="converter__btn"
               type="button"
               disabled={isDisabledForm}
-              onClick={() => saveResult(
+              onClick={() => onClickSaveResult(
                 {
                   currentDate,
                   iHaveValue,
@@ -185,6 +186,23 @@ class Converter extends PureComponent {
       </section>
     );
   }
+}
+
+Converter.propTypes = {
+  iHaveValue: PropTypes.string.isRequired,
+  iWantValue: PropTypes.string.isRequired,
+  haveCarrency: PropTypes.string.isRequired,
+  wantCarrency: PropTypes.string.isRequired,
+  currentDate: PropTypes.string.isRequired,
+  isDisabledForm: PropTypes.bool.isRequired,
+  dateList: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onClickSaveResult: PropTypes.func.isRequired,
+  onChangeIhaveValue: PropTypes.func.isRequired,
+  onChangeIwantValue: PropTypes.func.isRequired,
+  onChangeHaveCurrencyValue: PropTypes.func.isRequired,
+  changeSecondCurrencyName: PropTypes.func.isRequired,
+  onSetCurrentDate: PropTypes.func.isRequired,
+  getCurrencyList: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state) => ({
@@ -217,11 +235,10 @@ const mapDispachToProps = (dispatch) => ({
   getCurrencyList() {
     dispatch(getCarencyListAction());
   },
-  saveResult(result) {
+  onClickSaveResult(result) {
     dispatch(saveResultAction(result));
   } 
 
 });
-
 
 export default connect(mapStateToProps, mapDispachToProps)(Converter);

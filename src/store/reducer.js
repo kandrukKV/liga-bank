@@ -8,7 +8,7 @@ const start = getStartDate(end);
 const initialState = {
   period: {start, end},
   isConverterDisabled: false,
-  iHaveValue: 1000,
+  iHaveValue: '1000',
   iWantValue: '',
   haveCurrency: 'RUB',
   wantCurrency: 'USD',
